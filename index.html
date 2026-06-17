@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuizHub · Student Quizzes</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #eef2f7 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ----- NAVBAR (glassmorphism) ----- */
+        .navbar {
+            width: 100%;
+            max-width: 1280px;
+            margin: 1.5rem auto 0;
+            padding: 0.75rem 2.5rem;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 60px;
+            box-shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.25),
+                inset 0 1px 2px rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            color: #0b1e2b;
+        }
+
+        .nav-brand i {
+            font-size: 1.8rem;
+            color: #2a6f8f;
+            background: rgba(42, 111, 143, 0.12);
+            padding: 0.3rem 0.5rem;
+            border-radius: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 550;
+            color: #1a3342;
+            padding: 0.4rem 0.8rem;
+            border-radius: 40px;
+            transition: all 0.15s ease;
+            font-size: 0.98rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+        }
+
+        .nav-links a i {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .nav-links a:hover {
+            background: rgba(42, 111, 143, 0.12);
+            color: #0b2c3d;
+            transform: scale(1.02);
+        }
+
+        .nav-links .btn-primary {
+            background: #1e4b5e;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 550;
+            box-shadow: 0 6px 14px rgba(26, 75, 95, 0.25);
+            transition: 0.2s;
+        }
+
+        .nav-links .btn-primary i {
+            color: white;
+            opacity: 1;
+        }
+
+        .nav-links .btn-primary:hover {
+            background: #123845;
+            box-shadow: 0 10px 18px rgba(18, 56, 69, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* ----- MAIN CARD (content) ----- */
+        .main-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 2rem auto 3rem;
+            padding: 0 1.5rem;
+        }
+
+        .platform-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 48px;
+            padding: 2.5rem 2.8rem;
+            box-shadow: 0 30px 50px -20px rgba(0, 20, 30, 0.25),
+                inset 0 1px 2px rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .platform-card h1 {
+            font-size: 2.1rem;
+            font-weight: 650;
+            letter-spacing: -0.02em;
+            color: #0d1f2b;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .platform-card h1 i {
+            color: #2a6f8f;
+            font-size: 2rem;
+        }
+
+        .subhead {
+            color: #2a4b5e;
+            font-weight: 400;
+            margin-bottom: 2.2rem;
+            border-left: 4px solid #518aa8;
+            padding-left: 1rem;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ----- TOPIC FILTER / BADGE ----- */
+        .topic-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1rem;
+            margin-bottom: 1.8rem;
+            padding: 0.2rem 0;
+        }
+
+        .topic-badge {
+            background: rgba(255, 255, 255, 0.4);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a4052;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .topic-badge:hover {
+            background: rgba(42, 111, 143, 0.1);
+            transform: scale(1.02);
+        }
+
+        .topic-badge i {
+            color: #2a6f8f;
+            font-size: 0.8rem;
+        }
+
+        /* ----- QUIZ FILE LIST (hyperlinks) ----- */
+        .quiz-list-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin: 0.5rem 0 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .quiz-list-header h2 {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #0d1f2b;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-list-header h2 i {
+            color: #2a6f8f;
+            font-size: 1.4rem;
+        }
+
+        .file-count {
+            background: rgba(42, 111, 143, 0.08);
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a4b5e;
+        }
+
+        .quiz-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .quiz-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 1.8rem;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.15s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.01);
+            cursor: pointer;
+        }
+
+        .quiz-item:hover {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(42, 111, 143, 0.3);
+            transform: translateX(5px);
+            box-shadow: 0 10px 20px -10px rgba(0, 20, 30, 0.15);
+        }
+
+        .quiz-item .file-icon {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 500;
+            color: #0d212f;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .quiz-item .file-icon i {
+            font-size: 1.5rem;
+            color: #2a6f8f;
+            width: 28px;
+            text-align: center;
+        }
+
+        .quiz-item .file-link {
+            text-decoration: none;
+            color: #0d212f;
+            font-weight: 500;
+            transition: 0.1s;
+            border-bottom: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            word-break: break-word;
+        }
+
+        .quiz-item .file-link:hover {
+            color: #1a4b5e;
+            border-bottom-color: #2a6f8f;
+        }
+
+        .quiz-item .file-link i {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            transition: 0.2s;
+        }
+
+        .quiz-item .file-link:hover i {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        .quiz-item .topic-tag {
+            background: rgba(42, 111, 143, 0.06);
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #1a4b5e;
+            border: 1px solid rgba(42, 111, 143, 0.08);
+            white-space: nowrap;
+            margin: 0 0.5rem;
+        }
+
+        .quiz-item .file-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .quiz-item .file-actions .open-badge {
+            background: rgba(42, 111, 143, 0.08);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1a4b5e;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(42, 111, 143, 0.1);
+        }
+
+        .quiz-item .file-actions .open-badge i {
+            font-size: 0.7rem;
+        }
+
+        .empty-state {
+            padding: 3rem 1rem;
+            text-align: center;
+            color: #3a5e72;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 80px;
+            border: 1px dashed rgba(42, 111, 143, 0.2);
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            opacity: 0.3;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .empty-state strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ----- MANUAL EDIT INSTRUCTION (clear & prominent) ----- */
+        .manual-hint {
+            margin-top: 2rem;
+            padding: 1.2rem 1.8rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #1a4052;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .manual-hint .hint-icon {
+            background: #1e4b5e;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .manual-hint .hint-icon i {
+            font-size: 0.9rem;
+        }
+
+        .manual-hint code {
+            background: rgba(0, 0, 0, 0.06);
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #0f2d3b;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .manual-hint .highlight {
+            background: rgba(42, 111, 143, 0.08);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* Reset button */
+        .reset-btn {
+            background: #c44536;
+            color: white;
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 550;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(196, 69, 54, 0.2);
+        }
+
+        .reset-btn:hover {
+            background: #a8382b;
+            transform: scale(1.02);
+            box-shadow: 0 6px 14px rgba(196, 69, 54, 0.3);
+        }
+
+        .reset-btn i {
+            font-size: 0.9rem;
+        }
+
+        /* small screens */
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+                border-radius: 40px;
+                padding: 1rem 1.8rem;
+                margin: 1rem 1rem 0;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .platform-card {
+                padding: 1.8rem 1.2rem;
+                border-radius: 32px;
+            }
+            .quiz-item {
+                flex-wrap: wrap;
+                gap: 0.4rem;
+                padding: 0.9rem 1.2rem;
+                border-radius: 40px;
+            }
+            .quiz-item .topic-tag {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.7rem;
+            }
+            .quiz-item .file-actions {
+                margin-left: auto;
+            }
+            .manual-hint {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 1.2rem;
+            }
+            .manual-hint .hint-icon {
+                white-space: normal;
+            }
+            .reset-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .nav-brand {
+                font-size: 1.2rem;
+            }
+            .quiz-item .file-link {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-brain"></i>
+            <span>Quiz<span style="font-weight:300;">Hub</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <a href="#"><i class="fas fa-chart-simple"></i> Stats</a>
+            <a href="#" class="btn-primary"><i class="fas fa-plus-circle"></i> New Quiz</a>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <div class="main-container">
+        <div class="platform-card">
+
+            <h1>
+                <i class="fas fa-puzzle-piece"></i> Student Quizzes
+            </h1>
+            <div class="subhead">
+                <i class="fas fa-graduation-cap" style="margin-right: 8px;"></i>
+                Click any quiz below to start. New quizzes added by topic — keep learning!
+            </div>
+
+            <!-- TOPIC BADGES (auto-generated from quiz list) -->
+            <div class="topic-filter" id="topicFilterContainer">
+                <!-- dynamic topic badges will be injected here -->
+            </div>
+
+            <!-- QUIZ LIST -->
+            <div class="quiz-list-header">
+                <h2><i class="fas fa-list-ul"></i> Available quizzes</h2>
+                <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                    <span class="file-count" id="fileCounter">0 files</span>
+                    <button class="reset-btn" id="resetBtn">
+                        <i class="fas fa-rotate"></i> Reset to Manual List
+                    </button>
+                </div>
+            </div>
+
+            <div class="quiz-grid" id="quizListContainer">
+                <!-- dynamic items will be injected here -->
+            </div>
+
+           
+
+        </div>
+    </div>
+
+    <script>
+        (function() {
+          
+            const MANUAL_QUIZ_FILES = [
+                // ----- default examples (topic-wise) -----
+                { name: "Static Key in Java", url: "static.html", topic: "Java" },
+                { name: "String-1 Basics Quiz", url: "string1.html", topic: "Java" },
+                { name: "String-2 Basics Quiz", url: "string2.html", topic: "Java" },
+                { name: "String-3 Basics Quiz", url: "string3.html", topic: "Java" },
+                { name: "SQL Joins", url: "sql-joins.html", topic: "Database" },
+                { name: "React Hooks", url: "react-hooks.html", topic: "React" },
+
+             
+                { name: "JavaScript Closures", url: "js-closures.html", topic: "JavaScript" },
+                { name: "Docker Basics",       url: "docker.html",      topic: "DevOps" },
+            ];
+          
+            const container = document.getElementById('quizListContainer');
+            const fileCounter = document.getElementById('fileCounter');
+            const topicContainer = document.getElementById('topicFilterContainer');
+            const resetBtn = document.getElementById('resetBtn');
+
+            // Current active data (starts as a copy of MANUAL_QUIZ_FILES)
+            let quizFiles = [];
+
+            // Current filter
+            let currentFilter = 'all';
+
+            // --------------------------------------------------------------
+            // Core functions
+            // --------------------------------------------------------------
+
+            // Reset to the manual list (from the code)
+            function resetToManualList() {
+                // Deep copy the manual array
+                quizFiles = MANUAL_QUIZ_FILES.map(f => ({ ...f }));
+                // Save to localStorage
+                saveToStorage();
+                // Re-render everything
+                renderTopics();
+                renderQuizList();
+                // Show feedback
+                showToast('✅ Reset to manual list successfully!');
+            }
+
+            // Load from localStorage, or fallback to manual list
+            function loadFromStorage() {
+                try {
+                    const stored = localStorage.getItem('quizFilesManual');
+                    if (stored) {
+                        const parsed = JSON.parse(stored);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            quizFiles = parsed.map(f => ({ ...f }));
+                            return;
+                        }
+                    }
+                } catch (_) {}
+                // If nothing in storage, use manual list
+                quizFiles = MANUAL_QUIZ_FILES.map(f => ({ ...f }));
+                // Save it to storage
+                saveToStorage();
+            }
+
+            function saveToStorage() {
+                try {
+                    localStorage.setItem('quizFilesManual', JSON.stringify(quizFiles));
+                } catch (_) {}
+            }
+
+            // ----- render topics -----
+            function renderTopics() {
+                const topics = new Set();
+                quizFiles.forEach(file => {
+                    if (file.topic && file.topic.trim()) {
+                        topics.add(file.topic.trim());
+                    }
+                });
+
+                let html = '';
+                if (topics.size > 0) {
+                    // add "All" badge
+                    html +=
+                        `<span class="topic-badge" data-topic="all"><i class="fas fa-th-list"></i> All</span>`;
+                    // sort topics alphabetically
+                    const sorted = Array.from(topics).sort();
+                    sorted.forEach(t => {
+                        html += `<span class="topic-badge" data-topic="${t}"><i class="fas fa-tag"></i> ${t}</span>`;
+                    });
+                } else {
+                    html = `<span class="topic-badge"><i class="fas fa-info-circle"></i> No topics yet</span>`;
+                }
+                topicContainer.innerHTML = html;
+
+                // add click filter functionality
+                document.querySelectorAll('.topic-badge').forEach(badge => {
+                    badge.addEventListener('click', function() {
+                        const topic = this.dataset.topic;
+                        // remove active from all
+                        document.querySelectorAll('.topic-badge').forEach(b => {
+                            b.style.background = 'rgba(255,255,255,0.4)';
+                            b.style.borderColor = 'rgba(255,255,255,0.3)';
+                        });
+                        this.style.background = 'rgba(42,111,143,0.15)';
+                        this.style.borderColor = 'rgba(42,111,143,0.3)';
+                        filterByTopic(topic);
+                    });
+                });
+
+                // set "All" as active by default
+                const allBadge = document.querySelector('.topic-badge[data-topic="all"]');
+                if (allBadge) {
+                    allBadge.style.background = 'rgba(42,111,143,0.15)';
+                    allBadge.style.borderColor = 'rgba(42,111,143,0.3)';
+                }
+            }
+
+            // ----- filter quiz list by topic -----
+            function filterByTopic(topic) {
+                currentFilter = topic;
+                renderQuizList();
+            }
+
+            // ----- render quiz list (with optional filter) -----
+            function renderQuizList() {
+                let filtered = quizFiles;
+                if (currentFilter !== 'all') {
+                    filtered = quizFiles.filter(f => f.topic && f.topic.trim() === currentFilter);
+                }
+
+                if (!filtered || filtered.length === 0) {
+                    container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-file-circle-plus"></i>
+                        <strong>No quizzes found for this topic</strong>
+                        <span style="font-size:0.9rem; opacity:0.7;">Add more quizzes or select another topic.</span>
+                    </div>
+                  `;
+                    fileCounter.textContent = '0 files';
+                    return;
+                }
+
+                let html = '';
+                filtered.forEach((file, index) => {
+                    const displayName = (file.name && file.name.trim()) ? file.name.trim() : 'untitled.html';
+                    const href = (file.url && file.url.trim()) ? file.url : file.name;
+                    const topic = (file.topic && file.topic.trim()) ? file.topic.trim() : 'General';
+
+                    html += `
+                      <div class="quiz-item" data-index="${index}">
+                        <div class="file-icon">
+                          <i class="fas fa-file-code"></i>
+                          <a href="${href}" target="_blank" class="file-link" title="Start quiz: ${displayName}">
+                            ${displayName}
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                          </a>
+                          <span class="topic-tag"><i class="fas fa-tag" style="font-size:0.6rem;"></i> ${topic}</span>
+                        </div>
+                        <div class="file-actions">
+                          <span class="open-badge">
+                            <i class="fas fa-play"></i> start quiz
+                          </span>
+                        </div>
+                      </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+                fileCounter.textContent = `${filtered.length} quiz${filtered.length !== 1 ? 'zes' : ''}`;
+
+                // make the whole item clickable (in addition to the link)
+                document.querySelectorAll('.quiz-item').forEach(item => {
+                    const link = item.querySelector('.file-link');
+                    if (link) {
+                        item.addEventListener('click', function(e) {
+                            if (e.target.closest('a')) return;
+                            link.click();
+                        });
+                    }
+                });
+            }
+
+            // Simple toast notification
+            function showToast(message) {
+                const existing = document.querySelector('.toast-msg');
+                if (existing) existing.remove();
+
+                const toast = document.createElement('div');
+                toast.className = 'toast-msg';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 2rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #1e4b5e;
+                    color: white;
+                    padding: 0.8rem 2rem;
+                    border-radius: 60px;
+                    font-weight: 500;
+                    font-size: 0.95rem;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                    z-index: 999;
+                    animation: slideUp 0.3s ease;
+                    border: 1px solid rgba(255,255,255,0.1);
+                  `;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transition = 'opacity 0.5s';
+                    setTimeout(() => toast.remove(), 500);
+                }, 2500);
+
+                // Add keyframe if not exists
+                if (!document.getElementById('toastStyles')) {
+                    const style = document.createElement('style');
+                    style.id = 'toastStyles';
+                    style.textContent = `
+                      @keyframes slideUp {
+                        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+                        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+                      }
+                    `;
+                    document.head.appendChild(style);
+                }
+            }
+
+            // --------------------------------------------------------------
+            // INIT
+            // --------------------------------------------------------------
+
+            // Load from storage (or use manual list)
+            loadFromStorage();
+
+            // Render everything
+            renderTopics();
+
+            // Reset filter to 'all' and render
+            currentFilter = 'all';
+            renderQuizList();
+
+            // Reset button event
+            resetBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                resetToManualList();
+            });
+
+            // Expose for debugging
+            window.__quizFiles = quizFiles;
+            window.__manualList = MANUAL_QUIZ_FILES;
+            window.__resetQuizList = resetToManualList;
+
+         console.log('Abhishek Kumar Tiwari [ Wipro Certified Full Stack Java Trainer]. GLA');
+        })();
+    </script>
+
+    
+  
+
+</body>
+</html>

@@ -1,0 +1,653 @@
+You are absolutely right! The questions were defined but the rendering had an issue. Here is the **fully corrected HTML file** where all 20 questions are clearly visible with proper formatting.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Java String Methods: Complete MCQ Quiz | 20 Essential Methods</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', 'Poppins', system-ui, sans-serif;
+            background: linear-gradient(145deg, #0b2b2f 0%, #123e42 100%);
+            min-height: 100vh;
+            padding: 1.8rem 1rem;
+        }
+
+        .quiz-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* header area */
+        .method-hero {
+            background: linear-gradient(125deg, #1d3e3f, #0e2a2c);
+            border-radius: 2.2rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 18px 30px -12px rgba(0,0,0,0.4);
+            border-bottom: 3px solid #f7b05e;
+        }
+
+        .method-hero h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #FFE6B0, #FFB347);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .method-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 18px 0 8px;
+        }
+
+        .badge-method {
+            background: #2c5548;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            color: #fdebb3;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .sub {
+            color: #bbd4ce;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* stats bar */
+        .stats-bar {
+            background: #112e31e0;
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 0.7rem 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 1.8rem;
+            border: 1px solid #f7b05e60;
+        }
+
+        .stat-chip {
+            background: #051f22;
+            padding: 0.4rem 1.2rem;
+            border-radius: 3rem;
+            color: #f5e2c1;
+            font-weight: 600;
+        }
+
+        .stat-chip span:first-child {
+            color: #FFB347;
+            margin-right: 8px;
+        }
+
+        .reset-btn {
+            background: #f7b05e;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 3rem;
+            font-weight: bold;
+            color: #1f3e3a;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+
+        .reset-btn:hover {
+            background: #ffa33c;
+            transform: scale(0.96);
+        }
+
+        /* questions grid */
+        .questions-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+
+        .q-card {
+            background: #fffffffd;
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.8rem;
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-left: 7px solid #f7b05e;
+        }
+
+        .q-title {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .q-num {
+            background: #fef1df;
+            color: #b6540c;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.75rem;
+        }
+
+        .q-text {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a3d42;
+            line-height: 1.4;
+        }
+
+        .code-block {
+            background: #1e2a2f;
+            color: #e2eaf1;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            margin: 12px 0 16px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border-left: 3px solid #f7b05e;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 10px 0 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #faf9fe;
+            padding: 0.55rem 1.2rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.12s;
+            border: 1px solid #e2e4e8;
+        }
+
+        .option:hover {
+            background: #fff4e6;
+            border-color: #f7b05e;
+        }
+
+        input[type="radio"] {
+            accent-color: #f7b05e;
+            width: 17px;
+            height: 17px;
+        }
+
+        .option label {
+            font-weight: 500;
+            color: #1f3e42;
+            cursor: pointer;
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
+        .feedback {
+            margin-top: 14px;
+            padding: 10px 16px;
+            border-radius: 1rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .fb-correct {
+            background: #dff3e3;
+            color: #136b3a;
+            border-left: 4px solid #2b9348;
+        }
+
+        .fb-wrong {
+            background: #ffe6e5;
+            color: #b91c1c;
+            border-left: 4px solid #e53e3e;
+        }
+
+        .fb-neutral {
+            background: #f0f4f9;
+            color: #2c5a66;
+        }
+
+        .submit-area {
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(100deg, #f59e2e, #f7b05e);
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #1b3c3a;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            max-width: 280px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(100deg, #f08c1a, #ffa940);
+            transform: translateY(-2px);
+        }
+
+        .result-panel {
+            background: #eef3f1cc;
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            text-align: center;
+            font-weight: bold;
+            color: #153e3b;
+            margin-top: 0.5rem;
+            border: 1px solid #f7b05e;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #cbe1dd;
+        }
+
+        @media (max-width: 650px) {
+            .q-card {
+                padding: 1rem;
+            }
+            .method-hero h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="quiz-container">
+    <div class="method-hero">
+        <h1>🔤 Java String Methods <span>📚</span></h1>
+        <div class="method-badges">
+            <span class="badge-method">indexOf()</span> <span class="badge-method">compareTo()</span> <span class="badge-method">compareToIgnoreCase()</span>
+            <span class="badge-method">contains()</span> <span class="badge-method">equalsIgnoreCase()</span> <span class="badge-method">format()</span>
+            <span class="badge-method">getBytes()</span> <span class="badge-method">getChars()</span> <span class="badge-method">replace()</span>
+            <span class="badge-method">replaceAll()</span> <span class="badge-method">replaceFirst()</span> <span class="badge-method">split()</span>
+            <span class="badge-method">substring()</span> <span class="badge-method">toCharArray()</span> <span class="badge-method">trim()</span>
+            <span class="badge-method">valueOf()</span> <span class="badge-method">startsWith()</span>
+        </div>
+        <p class="sub">20 MCQs covering essential String manipulation methods</p>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat-chip"><span>🎯 Score</span> <span id="scoreDisplay">0</span> / <span id="totalQuestionsSpan">20</span></div>
+        <div class="stat-chip"><span>✏️ Attempted</span> <span id="attemptedCount">0</span> / <span id="totalSpan2">20</span></div>
+        <button class="reset-btn" id="resetQuizBtn">⟳ Reset Quiz</button>
+    </div>
+
+    <div id="questionsContainer" class="questions-grid"></div>
+
+    <div class="submit-area">
+        <button class="submit-btn" id="submitQuizBtn">✅ Submit & See Explanations</button>
+    </div>
+    <div id="resultPanel" class="result-panel" style="display: none;"></div>
+    <footer>💡 Each question tests a specific String method — read the code snippets carefully.</footer>
+</div>
+
+<script>
+    // ==================== 20 MCQs covering all required methods ====================
+    const questions = [
+        { // 1 - indexOf
+            text: "What does `indexOf('e', 4)` return for `\"Hello everyone\"`?",
+            code: `String str = "Hello everyone";\nint idx = str.indexOf('e', 4);`,
+            options: ["1", "4", "6", "9"],
+            correct: 2,
+            explanation: "indexOf('e',4) starts searching from index 4 (character 'o' at position 4), finds 'e' at index 6 (the 'e' in 'everyone')."
+        },
+        { // 2 - compareTo
+            text: "What is the sign of `\"apple\".compareTo(\"banana\")`?",
+            code: `int result = "apple".compareTo("banana");`,
+            options: ["positive (>0)", "zero", "negative (<0)", "compilation error"],
+            correct: 2,
+            explanation: "'a' (ASCII 97) vs 'b' (ASCII 98) → 97-98 = -1 (negative)."
+        },
+        { // 3 - compareToIgnoreCase
+            text: "What does `\"JAVA\".compareToIgnoreCase(\"java\")` return?",
+            code: `int cmp = "JAVA".compareToIgnoreCase("java");`,
+            options: ["positive", "negative", "0", "runtime exception"],
+            correct: 2,
+            explanation: "compareToIgnoreCase ignores case, both become 'java' → 0."
+        },
+        { // 4 - contains
+            text: "`\"Hello world\".contains(\"World\")` returns?",
+            code: `boolean b = "Hello world".contains("World");`,
+            options: ["true", "false", "compiler error", "null"],
+            correct: 1,
+            explanation: "contains() is case-sensitive, 'World' ≠ 'world' → false."
+        },
+        { // 5 - equalsIgnoreCase
+            text: "Output of `\"JAVA\".equalsIgnoreCase(\"Java\")` ?",
+            code: `System.out.println("JAVA".equalsIgnoreCase("Java"));`,
+            options: ["true", "false", "NullPointerException", "0"],
+            correct: 0,
+            explanation: "equalsIgnoreCase ignores case differences → true."
+        },
+        { // 6 - format
+            text: "Which is correct String.format output?",
+            code: `String msg = String.format("Value: %.2f", 3.1415);`,
+            options: ["\"Value: 3.14\"", "\"Value: 3.1415\"", "\"Value: 3,14\"", "Compilation error"],
+            correct: 0,
+            explanation: "%.2f formats float with 2 decimal places → '3.14'."
+        },
+        { // 7 - getBytes
+            text: "What does `getBytes()` return?",
+            code: `byte[] data = "ABC".getBytes();`,
+            options: ["byte array of ASCII values", "String array", "char array", "UTF-16 encoded array"],
+            correct: 0,
+            explanation: "getBytes() returns byte array using platform's default charset (ASCII/UTF-8)."
+        },
+        { // 8 - getChars
+            text: "What does `getChars(2,5,dest,0)` store from `\"Mountains\"`?",
+            code: `char[] dest = new char[3];\n"Mountains".getChars(2,5,dest,0);`,
+            options: ["\"unt\"", "\"oun\"", "\"Mou\"", "\"ain\""],
+            correct: 0,
+            explanation: "Indices: M0 o1 u2 n3 t4 a5... getChars(2,5) → indexes 2(u),3(n),4(t) → \"unt\"."
+        },
+        { // 9 - replace
+            text: "`\"catalog\".replace('a','o')` yields?",
+            code: `String r = "catalog".replace('a','o');`,
+            options: ["\"cotolog\"", "\"catalog\"", "\"cotalog\"", "\"cotolag\""],
+            correct: 0,
+            explanation: "replace all 'a' with 'o' → c o t o l o g → \"cotolog\"."
+        },
+        { // 10 - replaceAll
+            text: "`\"1a2b3c\".replaceAll(\"\\\\d\", \"X\")` result?",
+            code: `String res = "1a2b3c".replaceAll("\\\\d", "X");`,
+            options: ["\"XaXbXc\"", "\"1a2b3c\"", "\"abc\"", "\"Xa2b3c\""],
+            correct: 0,
+            explanation: "\\\\d matches digits, replaced by 'X' → XaXbXc."
+        },
+        { // 11 - replaceFirst
+            text: "`\"cat cat dog\".replaceFirst(\"cat\", \"bat\")`",
+            code: `String out = "cat cat dog".replaceFirst("cat", "bat");`,
+            options: ["\"bat cat dog\"", "\"bat bat dog\"", "\"cat bat dog\"", "\"bat cat bat\""],
+            correct: 0,
+            explanation: "replaceFirst replaces only first occurrence → 'bat cat dog'."
+        },
+        { // 12 - split
+            text: "`\"one,two,three\".split(\",\").length`",
+            code: `String[] arr = "one,two,three".split(",");`,
+            options: ["1", "2", "3", "4"],
+            correct: 2,
+            explanation: "split by comma gives 3 elements: [\"one\",\"two\",\"three\"]."
+        },
+        { // 13 - substring
+            text: "`\"Programmer\".substring(3,7)`",
+            code: `String sub = "Programmer".substring(3,7);`,
+            options: ["\"gram\"", "\"og\"", "\"gra\"", "\"gramm\""],
+            correct: 0,
+            explanation: "Indices: P0 r1 o2 g3 r4 a5 m6 m7 → substring(3,7) → g,r,a,m → \"gram\"."
+        },
+        { // 14 - toCharArray
+            text: "`\"Code\".toCharArray()[2]`",
+            code: `char[] ch = "Code".toCharArray();`,
+            options: ["'C'", "'o'", "'d'", "'e'"],
+            correct: 2,
+            explanation: "toCharArray() → ['C','o','d','e'], index 2 = 'd'."
+        },
+        { // 15 - trim
+            text: "`\"   trim me  \".trim().length()`",
+            code: `int len = "   trim me  ".trim().length();`,
+            options: ["7", "9", "5", "10"],
+            correct: 0,
+            explanation: "trim() removes spaces → \"trim me\" has 7 characters (t,r,i,m,space,m,e)."
+        },
+        { // 16 - valueOf
+            text: "`String.valueOf(123).charAt(1)`",
+            code: `char c = String.valueOf(123).charAt(1);`,
+            options: ["'1'", "'2'", "'3'", "IndexOutOfBounds"],
+            correct: 1,
+            explanation: "valueOf(123) → \"123\", charAt(1) = '2'."
+        },
+        { // 17 - startsWith
+            text: "`\"JavaQuiz\".startsWith(\"jav\")`",
+            code: `boolean sw = "JavaQuiz".startsWith("jav");`,
+            options: ["true", "false", "compile error", "null"],
+            correct: 1,
+            explanation: "startsWith is case-sensitive → 'Java' vs 'jav' → false."
+        },
+        { // 18 - getChars (second example)
+            text: "Using `getChars(1,4,dest,0)` on `\"beautiful\"`",
+            code: `char[] dest = new char[3];\n"beautiful".getChars(1,4,dest,0);\nSystem.out.print(dest);`,
+            options: ["\"eau\"", "\"bea\"", "\"aut\"", "\"uti\""],
+            correct: 0,
+            explanation: "Indices: b0 e1 a2 u3 t4... getChars(1,4) → e,a,u → \"eau\"."
+        },
+        { // 19 - compareToIgnoreCase
+            text: "Which returns 0 for `\"Tea\".compareToIgnoreCase(\"TEA\")`?",
+            code: `int x = "Tea".compareToIgnoreCase("TEA");`,
+            options: ["0", "positive", "negative", "undefined"],
+            correct: 0,
+            explanation: "Ignoring case, both \"tea\" are equal → 0."
+        },
+        { // 20 - indexOf substring
+            text: "What does `\"abcdef\".indexOf(\"cd\")` return?",
+            code: `int idx = "abcdef".indexOf("cd");`,
+            options: ["2", "3", "4", "-1"],
+            correct: 0,
+            explanation: "Substring 'cd' starts at index 2 (c at position 2)."
+        }
+    ];
+
+    const TOTAL_Q = questions.length;
+    document.getElementById("totalQuestionsSpan").innerText = TOTAL_Q;
+    document.getElementById("totalSpan2").innerText = TOTAL_Q;
+
+    let userAnswers = new Array(TOTAL_Q).fill(-1);
+    let quizSubmitted = false;
+
+    // Render all questions dynamically
+    function renderQuiz() {
+        const container = document.getElementById("questionsContainer");
+        if (!container) return;
+        container.innerHTML = "";
+        
+        for (let i = 0; i < questions.length; i++) {
+            const q = questions[i];
+            const card = document.createElement("div");
+            card.className = "q-card";
+            card.setAttribute("data-qidx", i);
+            
+            // Question header
+            const titleDiv = document.createElement("div");
+            titleDiv.className = "q-title";
+            titleDiv.innerHTML = `<span class="q-num">Q${i+1}</span><span class="q-text">${q.text}</span>`;
+            card.appendChild(titleDiv);
+            
+            // Code block if exists
+            if (q.code) {
+                const codeDiv = document.createElement("div");
+                codeDiv.className = "code-block";
+                codeDiv.innerHTML = q.code.replace(/\n/g, '<br>');
+                card.appendChild(codeDiv);
+            }
+            
+            // Options container
+            const optionsDiv = document.createElement("div");
+            optionsDiv.className = "options";
+            
+            for (let optIdx = 0; optIdx < q.options.length; optIdx++) {
+                const optWrap = document.createElement("div");
+                optWrap.className = "option";
+                
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = `q_${i}`;
+                radio.value = optIdx;
+                radio.id = `q${i}_opt${optIdx}`;
+                if (userAnswers[i] === optIdx) radio.checked = true;
+                
+                radio.addEventListener("change", (function(qIdx, oIdx) {
+                    return function() {
+                        if (quizSubmitted) {
+                            quizSubmitted = false;
+                            const resultPanel = document.getElementById("resultPanel");
+                            if (resultPanel) resultPanel.style.display = "none";
+                            // Remove all feedbacks
+                            const allFeedbacks = document.querySelectorAll(".feedback");
+                            allFeedbacks.forEach(fb => fb.remove());
+                        }
+                        userAnswers[qIdx] = oIdx;
+                        updateStatsUI();
+                        // Remove feedback from this card if any
+                        const fbDiv = card.querySelector(".feedback");
+                        if (fbDiv && !quizSubmitted) fbDiv.remove();
+                    };
+                })(i, optIdx));
+                
+                const label = document.createElement("label");
+                label.htmlFor = `q${i}_opt${optIdx}`;
+                label.innerText = `${String.fromCharCode(65+optIdx)}. ${q.options[optIdx]}`;
+                
+                optWrap.appendChild(radio);
+                optWrap.appendChild(label);
+                optionsDiv.appendChild(optWrap);
+            }
+            card.appendChild(optionsDiv);
+            
+            // Feedback placeholder
+            const feedbackDiv = document.createElement("div");
+            feedbackDiv.className = "feedback fb-neutral";
+            feedbackDiv.style.display = "none";
+            card.appendChild(feedbackDiv);
+            
+            container.appendChild(card);
+        }
+        updateStatsUI();
+    }
+
+    function updateStatsUI() {
+        let attempted = userAnswers.filter(v => v !== -1).length;
+        document.getElementById("attemptedCount").innerText = attempted;
+        if (quizSubmitted) {
+            let correct = 0;
+            for (let i = 0; i < TOTAL_Q; i++) {
+                if (userAnswers[i] === questions[i].correct) correct++;
+            }
+            document.getElementById("scoreDisplay").innerText = correct;
+        } else {
+            document.getElementById("scoreDisplay").innerText = "0";
+        }
+    }
+
+    function submitQuiz() {
+        quizSubmitted = true;
+        let correctCount = 0;
+        
+        const cards = document.querySelectorAll(".q-card");
+        
+        for (let i = 0; i < TOTAL_Q; i++) {
+            const selected = userAnswers[i];
+            const isCorrect = (selected === questions[i].correct);
+            if (isCorrect && selected !== -1) correctCount++;
+            
+            if (cards[i]) {
+                let fbDiv = cards[i].querySelector(".feedback");
+                if (!fbDiv) {
+                    fbDiv = document.createElement("div");
+                    fbDiv.className = "feedback";
+                    cards[i].appendChild(fbDiv);
+                }
+                
+                const qd = questions[i];
+                const correctLetter = String.fromCharCode(65 + qd.correct);
+                const correctAns = qd.options[qd.correct];
+                let msg = "";
+                let cls = "";
+                
+                if (selected === -1) {
+                    msg = `⚠️ Not answered. Correct: ${correctLetter}. ${correctAns}. ${qd.explanation}`;
+                    cls = "fb-wrong";
+                } else if (isCorrect) {
+                    msg = `✅ Correct! ${qd.explanation}`;
+                    cls = "fb-correct";
+                } else {
+                    const chosenLetter = String.fromCharCode(65 + selected);
+                    msg = `❌ Wrong: you chose ${chosenLetter}. ${qd.options[selected]}. Correct: ${correctLetter}. ${correctAns}. ${qd.explanation}`;
+                    cls = "fb-wrong";
+                }
+                
+                fbDiv.innerHTML = `<span>💬</span> ${msg}`;
+                fbDiv.className = `feedback ${cls}`;
+                fbDiv.style.display = "flex";
+            }
+        }
+        
+        document.getElementById("scoreDisplay").innerText = correctCount;
+        const percent = Math.round((correctCount / TOTAL_Q) * 100);
+        const resultDiv = document.getElementById("resultPanel");
+        let feedbackMsg = "";
+        if (correctCount === TOTAL_Q) {
+            feedbackMsg = "🏆 Perfect! You're a Java String Master!";
+        } else if (percent >= 80) {
+            feedbackMsg = "🎉 Great job! You have strong knowledge of String methods.";
+        } else if (percent >= 60) {
+            feedbackMsg = "📚 Good attempt! Review the explanations to strengthen your understanding.";
+        } else {
+            feedbackMsg = "📖 Keep practicing! Focus on indexOf, substring, and regex methods.";
+        }
+        
+        resultDiv.innerHTML = `✨ Score: ${correctCount}/${TOTAL_Q} (${percent}%)<br>${feedbackMsg}<br>🔄 Click "Reset Quiz" to try again.`;
+        resultDiv.style.display = "block";
+        updateStatsUI();
+    }
+
+    function resetQuiz() {
+        userAnswers.fill(-1);
+        quizSubmitted = false;
+        const resultPanel = document.getElementById("resultPanel");
+        if (resultPanel) resultPanel.style.display = "none";
+        renderQuiz();
+        updateStatsUI();
+    }
+
+    // Event listeners
+    document.getElementById("submitQuizBtn").addEventListener("click", submitQuiz);
+    document.getElementById("resetQuizBtn").addEventListener("click", resetQuiz);
+    
+    // Initial render
+    renderQuiz();
+</script>
+</body>
+</html>
+```

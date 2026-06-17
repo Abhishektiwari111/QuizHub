@@ -1,0 +1,682 @@
+Here is an HTML document with MCQs focused exclusively on the **`static` keyword** in Java, covering variables, methods, blocks, and nested classes.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Java static Keyword MCQ | Complete Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+            background: linear-gradient(145deg, #0f1a2e 0%, #1a2a3f 100%);
+            min-height: 100vh;
+            padding: 1.8rem 1rem;
+        }
+
+        .quiz-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* header */
+        .hero {
+            background: linear-gradient(135deg, #1e2f4a, #0f1f33);
+            border-radius: 2rem;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 4px solid #f5b042;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            color: #f5e6c8;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero h1 span {
+            background: #f5b042;
+            color: #1a2a3f;
+            padding: 0.1rem 1.2rem;
+            border-radius: 40px;
+            font-size: 1.8rem;
+        }
+
+        .hero p {
+            color: #b8cbe0;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .badge-item {
+            background: #2c405a;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            color: #f5dbb0;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* stats */
+        .stats {
+            background: #112233cc;
+            backdrop-filter: blur(6px);
+            border-radius: 2rem;
+            padding: 0.7rem 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 1.8rem;
+            border: 1px solid #f5b04255;
+        }
+
+        .stat-item {
+            background: #0a1a2a;
+            padding: 0.3rem 1.2rem;
+            border-radius: 3rem;
+            color: #e8eef5;
+            font-weight: 600;
+        }
+
+        .stat-item span:first-child {
+            color: #f5b042;
+            margin-right: 6px;
+        }
+
+        .reset-btn {
+            background: #f5b042;
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: 3rem;
+            font-weight: bold;
+            color: #1a2a3f;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .reset-btn:hover {
+            background: #e09d32;
+            transform: scale(0.96);
+        }
+
+        /* question cards */
+        .q-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .q-card {
+            background: #fffffffb;
+            border-radius: 1.5rem;
+            padding: 1.4rem 1.8rem;
+            border-left: 7px solid #f5b042;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            transition: 0.2s;
+        }
+
+        .q-header {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .q-num {
+            background: #fef1df;
+            color: #b6540c;
+            padding: 0.15rem 0.9rem;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.75rem;
+        }
+
+        .q-text {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a2f3f;
+            line-height: 1.5;
+        }
+
+        .code-block {
+            background: #1e2a33;
+            color: #e2eaf1;
+            padding: 0.7rem 1.2rem;
+            border-radius: 1rem;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            margin: 10px 0 14px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border-left: 3px solid #f5b042;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 8px 0 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #f8fafd;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.12s;
+            border: 1px solid #e2e6ec;
+        }
+
+        .option:hover {
+            background: #fff4e6;
+            border-color: #f5b042;
+        }
+
+        input[type="radio"] {
+            accent-color: #f5b042;
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .option label {
+            font-weight: 500;
+            color: #1a3040;
+            cursor: pointer;
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 10px 16px;
+            border-radius: 1rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .fb-correct {
+            background: #def3e2;
+            color: #136b3a;
+            border-left: 4px solid #2b9348;
+        }
+
+        .fb-wrong {
+            background: #ffe6e5;
+            color: #b91c1c;
+            border-left: 4px solid #e53e3e;
+        }
+
+        .fb-neutral {
+            background: #f0f4f9;
+            color: #2c5a66;
+        }
+
+        .action-area {
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(100deg, #f59e2e, #f5b042);
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #1a2f3f;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            max-width: 280px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(100deg, #f08c1a, #ffa940);
+        }
+
+        .result-panel {
+            background: #eef3f1dd;
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            text-align: center;
+            font-weight: bold;
+            color: #153e3b;
+            margin-top: 0.5rem;
+            border: 1px solid #f5b042;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #9bb9d4;
+        }
+
+        @media (max-width: 650px) {
+            .q-card {
+                padding: 1rem;
+            }
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-wrapper">
+    <div class="hero">
+        <h1>⚡ static Keyword <span>MCQ</span></h1>
+        <p>Variables · Methods · Blocks · Nested Classes · Memory Management</p>
+        <div class="badge-row">
+            <span class="badge-item">static variable</span>
+            <span class="badge-item">static method</span>
+            <span class="badge-item">static block</span>
+            <span class="badge-item">static nested class</span>
+            <span class="badge-item">static import</span>
+            <span class="badge-item">memory</span>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat-item"><span>🎯 Score</span> <span id="scoreDisplay">0</span> / <span id="totalQ">18</span></div>
+        <div class="stat-item"><span>✏️ Attempted</span> <span id="attemptedCount">0</span> / <span id="totalQ2">18</span></div>
+        <button class="reset-btn" id="resetBtn">⟳ Reset Quiz</button>
+    </div>
+
+    <div id="questionsContainer" class="q-grid"></div>
+
+    <div class="action-area">
+        <button class="submit-btn" id="submitBtn">✅ Submit & Check</button>
+    </div>
+    <div id="resultPanel" class="result-panel"></div>
+    <footer>💡 All questions focus on the static keyword — method binding, variable sharing, and class-level behavior.</footer>
+</div>
+
+<script>
+    // ==================== 18 MCQs on static keyword ====================
+    const questions = [
+        { // 1
+            text: "Which of the following is TRUE about a static variable?",
+            code: "class Counter { static int count = 0; }",
+            options: [
+                "Each object gets its own copy",
+                "All objects share the same copy",
+                "It is stored in stack memory",
+                "It cannot be accessed by static methods"
+            ],
+            correct: 1,
+            explanation: "Static variables belong to the class, not instances. All objects share the same copy."
+        },
+        { // 2
+            text: "Can a static method access an instance variable directly?",
+            code: "class Demo {\n    int x = 10;\n    static void show() { System.out.println(x); }\n}",
+            options: [
+                "Yes, always",
+                "No, it causes compilation error",
+                "Yes, if the instance variable is public",
+                "Only in the same package"
+            ],
+            correct: 1,
+            explanation: "Static methods cannot directly access instance variables because no 'this' reference exists. It causes compilation error."
+        },
+        { // 3
+            text: "What is the output?",
+            code: "class Test {\n    static int a = 5;\n    static { a = 10; }\n    public static void main(String[] args) {\n        System.out.println(a);\n    }\n}",
+            options: ["5", "10", "0", "Compilation error"],
+            correct: 1,
+            explanation: "Static block executes before main() and updates 'a' from 5 to 10."
+        },
+        { // 4
+            text: "Which is the correct way to call a static method from another class?",
+            code: "class MathUtils { static int add(int a, int b) { return a+b; } }",
+            options: [
+                "MathUtils.add(2,3)",
+                "new MathUtils().add(2,3)",
+                "add(2,3)",
+                "MathUtils.add(2,3) and new MathUtils().add(2,3) both are correct"
+            ],
+            correct: 0,
+            explanation: "Static methods are called using class name: ClassName.methodName(). Instance call works but not recommended."
+        },
+        { // 5
+            text: "What is the output?",
+            code: "class A {\n    static void show() { System.out.print(\"A \"); }\n}\nclass B extends A {\n    static void show() { System.out.print(\"B \"); }\n}\n// in main:\nA obj = new B();\nobj.show();",
+            options: ["A", "B", "A B", "Compilation error"],
+            correct: 0,
+            explanation: "Static methods are NOT polymorphic. Method call depends on reference type (A), not object type → 'A'."
+        },
+        { // 6
+            text: "When does a static block execute?",
+            code: "class Demo { static { System.out.println(\"Static\"); } }",
+            options: [
+                "When an object is created",
+                "When the class is first loaded",
+                "When the static method is called",
+                "At the end of main()"
+            ],
+            correct: 1,
+            explanation: "Static blocks execute when the class is first loaded into memory by the JVM."
+        },
+        { // 7
+            text: "Can you use 'this' inside a static method?",
+            code: "class X { static void m() { System.out.println(this); } }",
+            options: ["Yes", "No, compilation error", "Yes, but it refers to class", "Only if this is static"],
+            correct: 1,
+            explanation: "'this' refers to the current object. Static methods have no object context, so using 'this' causes compilation error."
+        },
+        { // 8
+            text: "What is a static nested class?",
+            code: "class Outer { static class Inner { } }",
+            options: [
+                "It can access all members of Outer",
+                "It can only access static members of Outer",
+                "It cannot be instantiated",
+                "It must be final"
+            ],
+            correct: 1,
+            explanation: "A static nested class can only access static members of the outer class directly."
+        },
+        { // 9
+            text: "What is the output?",
+            code: "class Test {\n    static int x = 10;\n    static { x = 20; }\n    public static void main(String[] args) {\n        System.out.println(x);\n    }\n}",
+            options: ["10", "20", "0", "Compilation error"],
+            correct: 1,
+            explanation: "Static block executes after static variable initialization, setting x to 20."
+        },
+        { // 10
+            text: "Which import statement is used for static import?",
+            code: "// to import Math.PI and Math.sqrt()",
+            options: [
+                "import static java.lang.Math.*;",
+                "import java.lang.Math.*;",
+                "static import java.lang.Math.*;",
+                "import java.lang.Math static;"
+            ],
+            correct: 0,
+            explanation: "Static import uses 'import static package.ClassName.*;' to import static members."
+        },
+        { // 11
+            text: "Can a static method be overridden?",
+            code: "class Parent { static void show() {} }\nclass Child extends Parent { static void show() {} }",
+            options: [
+                "Yes, it's called method overriding",
+                "No, it's method hiding, not overriding",
+                "Yes, if the method is final",
+                "No, compilation error"
+            ],
+            correct: 1,
+            explanation: "Static methods are hidden, not overridden. Overriding requires instance methods."
+        },
+        { // 12
+            text: "What is the output?",
+            code: "class Test {\n    static int count = 0;\n    Test() { count++; }\n    public static void main(String[] args) {\n        new Test(); new Test();\n        System.out.println(count);\n    }\n}",
+            options: ["0", "1", "2", "Compilation error"],
+            correct: 2,
+            explanation: "count is static and shared. Each constructor call increments it → 2."
+        },
+        { // 13
+            text: "Can we declare a static variable inside a method?",
+            code: "void method() { static int x = 0; }",
+            options: ["Yes", "No, compilation error", "Yes, but only in static methods", "Yes, if final"],
+            correct: 1,
+            explanation: "Static variables cannot be local variables; they must be declared at class level."
+        },
+        { // 14
+            text: "What is the purpose of a static initializer block?",
+            code: "static { /* code */ }",
+            options: [
+                "To initialize static variables",
+                "To create objects",
+                "To handle exceptions",
+                "To define constants"
+            ],
+            correct: 0,
+            explanation: "Static initializer blocks are used to initialize static variables or perform one-time setup when the class loads."
+        },
+        { // 15
+            text: "Which of the following can be static?",
+            code: "class A { ??? }",
+            options: [
+                "Only variables and methods",
+                "Variables, methods, blocks, and nested classes",
+                "Only methods",
+                "Only nested classes"
+            ],
+            correct: 1,
+            explanation: "In Java, static can be applied to: variables, methods, blocks, and nested (inner) classes."
+        },
+        { // 16
+            text: "What is the output?",
+            code: "class Test {\n    static int x = 10;\n    static { x = 30; }\n    static int y = x;\n    public static void main(String[] args) {\n        System.out.println(x + \" \" + y);\n    }\n}",
+            options: ["10 10", "30 30", "10 30", "30 10"],
+            correct: 1,
+            explanation: "Static block runs after x initialization, sets x=30. Then y = x = 30. Output: 30 30."
+        },
+        { // 17
+            text: "In a static nested class, how do you access it from outside?",
+            code: "class Outer { static class Inner { } }",
+            options: [
+                "Outer.Inner obj = new Outer.Inner();",
+                "Outer.Inner obj = new Inner();",
+                "Outer obj = new Outer.Inner();",
+                "Outer.Inner obj = new Outer().new Inner();"
+            ],
+            correct: 0,
+            explanation: "Static nested class is accessed as Outer.Inner and instantiated with new Outer.Inner()."
+        },
+        { // 18
+            text: "Which statement about static and instance is TRUE?",
+            code: "// choose the correct statement",
+            options: [
+                "Static methods can access instance methods directly",
+                "Instance methods can access static variables directly",
+                "Static variables are created for each object",
+                "Static methods cannot be called without objects"
+            ],
+            correct: 1,
+            explanation: "Instance methods can access static variables directly because static members belong to the class."
+        }
+    ];
+
+    const TOTAL = questions.length;
+    document.getElementById("totalQ").innerText = TOTAL;
+    document.getElementById("totalQ2").innerText = TOTAL;
+
+    let userAnswers = new Array(TOTAL).fill(-1);
+    let quizSubmitted = false;
+
+    function renderQuiz() {
+        const container = document.getElementById("questionsContainer");
+        if (!container) return;
+        container.innerHTML = "";
+
+        questions.forEach((q, idx) => {
+            const card = document.createElement("div");
+            card.className = "q-card";
+            card.dataset.qidx = idx;
+
+            const header = document.createElement("div");
+            header.className = "q-header";
+            header.innerHTML = `<span class="q-num">Q${idx+1}</span><span class="q-text">${q.text}</span>`;
+            card.appendChild(header);
+
+            if (q.code) {
+                const codeDiv = document.createElement("div");
+                codeDiv.className = "code-block";
+                codeDiv.innerHTML = q.code.replace(/\n/g, '<br>');
+                card.appendChild(codeDiv);
+            }
+
+            const optionsDiv = document.createElement("div");
+            optionsDiv.className = "options";
+
+            q.options.forEach((opt, optIdx) => {
+                const wrap = document.createElement("div");
+                wrap.className = "option";
+
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = `q_${idx}`;
+                radio.value = optIdx;
+                radio.id = `q${idx}_opt${optIdx}`;
+                if (userAnswers[idx] === optIdx) radio.checked = true;
+
+                radio.addEventListener("change", (function(qIdx, oIdx) {
+                    return function() {
+                        if (quizSubmitted) {
+                            quizSubmitted = false;
+                            document.getElementById("resultPanel").style.display = "none";
+                            document.querySelectorAll(".feedback").forEach(fb => fb.remove());
+                        }
+                        userAnswers[qIdx] = oIdx;
+                        updateStats();
+                        const fbDiv = card.querySelector(".feedback");
+                        if (fbDiv && !quizSubmitted) fbDiv.remove();
+                    };
+                })(idx, optIdx));
+
+                const label = document.createElement("label");
+                label.htmlFor = `q${idx}_opt${optIdx}`;
+                label.innerText = `${String.fromCharCode(65+optIdx)}. ${opt}`;
+
+                wrap.appendChild(radio);
+                wrap.appendChild(label);
+                optionsDiv.appendChild(wrap);
+            });
+
+            card.appendChild(optionsDiv);
+
+            const fb = document.createElement("div");
+            fb.className = "feedback fb-neutral";
+            fb.style.display = "none";
+            card.appendChild(fb);
+
+            container.appendChild(card);
+        });
+
+        updateStats();
+    }
+
+    function updateStats() {
+        const attempted = userAnswers.filter(v => v !== -1).length;
+        document.getElementById("attemptedCount").innerText = attempted;
+        if (quizSubmitted) {
+            let correct = 0;
+            for (let i = 0; i < TOTAL; i++) {
+                if (userAnswers[i] === questions[i].correct) correct++;
+            }
+            document.getElementById("scoreDisplay").innerText = correct;
+        } else {
+            document.getElementById("scoreDisplay").innerText = "0";
+        }
+    }
+
+    function submitQuiz() {
+        quizSubmitted = true;
+        let correctCount = 0;
+        const cards = document.querySelectorAll(".q-card");
+
+        for (let i = 0; i < TOTAL; i++) {
+            const selected = userAnswers[i];
+            const isCorrect = (selected === questions[i].correct);
+            if (isCorrect && selected !== -1) correctCount++;
+
+            if (cards[i]) {
+                let fbDiv = cards[i].querySelector(".feedback");
+                if (!fbDiv) {
+                    fbDiv = document.createElement("div");
+                    fbDiv.className = "feedback";
+                    cards[i].appendChild(fbDiv);
+                }
+
+                const qd = questions[i];
+                const correctLetter = String.fromCharCode(65 + qd.correct);
+                const correctAns = qd.options[qd.correct];
+                let msg = "", cls = "";
+
+                if (selected === -1) {
+                    msg = `⚠️ Not answered. Correct: ${correctLetter}. ${correctAns}. ${qd.explanation}`;
+                    cls = "fb-wrong";
+                } else if (isCorrect) {
+                    msg = `✅ Correct! ${qd.explanation}`;
+                    cls = "fb-correct";
+                } else {
+                    const chosenLetter = String.fromCharCode(65 + selected);
+                    msg = `❌ Wrong. You chose ${chosenLetter}. ${qd.options[selected]}. Correct: ${correctLetter}. ${correctAns}. ${qd.explanation}`;
+                    cls = "fb-wrong";
+                }
+
+                fbDiv.innerHTML = `<span>💡</span> ${msg}`;
+                fbDiv.className = `feedback ${cls}`;
+                fbDiv.style.display = "flex";
+            }
+        }
+
+        document.getElementById("scoreDisplay").innerText = correctCount;
+        const percent = Math.round((correctCount / TOTAL) * 100);
+        const panel = document.getElementById("resultPanel");
+
+        let msg = "";
+        if (correctCount === TOTAL) msg = "🏆 Perfect! You're a static keyword master!";
+        else if (percent >= 80) msg = "🎉 Excellent! You have a solid grasp of static.";
+        else if (percent >= 60) msg = "📚 Good! Review static block order and method hiding.";
+        else msg = "📖 Keep practicing! Focus on static vs instance differences.";
+
+        panel.innerHTML = `✨ Score: ${correctCount}/${TOTAL} (${percent}%)<br>${msg}<br>🔄 Click "Reset Quiz" to try again.`;
+        panel.style.display = "block";
+        updateStats();
+    }
+
+    function resetQuiz() {
+        userAnswers.fill(-1);
+        quizSubmitted = false;
+        document.getElementById("resultPanel").style.display = "none";
+        renderQuiz();
+        updateStats();
+    }
+
+    document.getElementById("submitBtn").addEventListener("click", submitQuiz);
+    document.getElementById("resetBtn").addEventListener("click", resetQuiz);
+
+    renderQuiz();
+</script>
+</body>
+</html>
+```

@@ -1,0 +1,620 @@
+Here is an interactive HTML quiz document for Java String concepts with a visually appealing color scheme.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Java String Quiz | Master String Concepts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #e0eafc 0%, #cfdef3 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        /* main container */
+        .quiz-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.35), 0 8px 18px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* header section */
+        .quiz-header {
+            background: linear-gradient(135deg, #1A2A3F 0%, #0F212E 100%);
+            padding: 2rem 2rem 1.8rem;
+            text-align: center;
+            border-bottom: 4px solid #f5b042;
+        }
+
+        .quiz-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            color: #F9F6EE;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .quiz-header h1 span {
+            background: #f5b042;
+            font-size: 1.4rem;
+            padding: 0.2rem 0.9rem;
+            border-radius: 60px;
+            color: #1e2a3a;
+            font-weight: 600;
+        }
+
+        .subhead {
+            color: #cbd5e6;
+            font-weight: 500;
+            margin-top: 8px;
+            font-size: 1rem;
+        }
+
+        /* stats bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #FFFFFFCC;
+            backdrop-filter: blur(8px);
+            padding: 0.9rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .score-box, .progress-box {
+            background: #1e2f3f;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .score-box span, .progress-box span {
+            color: #f5b042;
+            font-size: 1.2rem;
+            margin-right: 6px;
+        }
+
+        .reset-btn {
+            background: #f5b042;
+            border: none;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #1e2a3a;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .reset-btn:hover {
+            background: #e09d32;
+            transform: scale(0.97);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* questions grid */
+        .questions-area {
+            padding: 2rem 2rem 1.5rem;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 1.8rem;
+            margin-bottom: 2rem;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s;
+            border: 1px solid rgba(245, 176, 66, 0.2);
+        }
+
+        .question-card:hover {
+            border-color: rgba(245, 176, 66, 0.5);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .q-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #0f2b38;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .q-num {
+            background: #eef2ff;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #1e4a6e;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 0.8rem 1.2rem;
+            border-radius: 18px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            margin: 12px 0 18px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            border-left: 5px solid #f5b042;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 18px 0 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #f9fafc;
+            padding: 0.7rem 1.2rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.15s;
+            border: 1px solid #e9edf2;
+        }
+
+        .option:hover {
+            background: #fff2e0;
+            border-color: #f5b042;
+        }
+
+        input[type="radio"] {
+            accent-color: #f5b042;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .option label {
+            font-weight: 500;
+            color: #1f2f3e;
+            cursor: pointer;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .feedback {
+            margin-top: 14px;
+            padding: 10px 16px;
+            border-radius: 28px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f1f5f9;
+        }
+
+        .correct-feedback {
+            background: #e3f7ec;
+            color: #1e6f3f;
+            border-left: 5px solid #2b9348;
+        }
+
+        .wrong-feedback {
+            background: #ffe6e5;
+            color: #b91c1c;
+            border-left: 5px solid #e53e3e;
+        }
+
+        .neutral-feedback {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        /* submit button */
+        .submit-area {
+            text-align: center;
+            padding: 0.5rem 2rem 2rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(95deg, #1f3b4c, #153243);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(95deg, #2a4b62, #1c3e50);
+            transform: translateY(-3px);
+        }
+
+        .result-panel {
+            margin: 1rem 2rem 2rem;
+            background: #eef2ff;
+            border-radius: 2rem;
+            padding: 1.2rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 1px solid #cbdff2;
+            transition: 0.2s;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            padding: 1rem;
+            color: #4a5b6e;
+            background: #ffffffb3;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 700px) {
+            .questions-area {
+                padding: 1.2rem;
+            }
+            .question-card {
+                padding: 1rem;
+            }
+            .quiz-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h1>
+            ☕ Java String Mastery 
+            <span>MCQ Quiz</span>
+        </h1>
+        <p class="subhead">Test your knowledge on immutability, String pool, StringBuilder & tricky pitfalls</p>
+    </div>
+    
+    <div class="stats-bar">
+        <div class="score-box"><span>🏆 Score</span> <span id="scoreDisplay">0</span> / <span id="totalQuestionsSpan">16</span></div>
+        <div class="progress-box"><span>📋 Attempted</span> <span id="attemptedCount">0</span> / <span id="totalCountSpan2">16</span></div>
+        <button class="reset-btn" id="resetQuizBtn">⟳ Reset Quiz</button>
+    </div>
+
+    <div class="questions-area" id="questionsContainer">
+        <!-- dynamic questions injected -->
+    </div>
+
+    <div class="submit-area">
+        <button class="submit-btn" id="submitQuizBtn">✅ Submit Answers & Check</button>
+    </div>
+    <div id="resultPanel" class="result-panel" style="display: none;"></div>
+    <footer>💡 Each question has one correct answer — select, submit, and review explanations.</footer>
+</div>
+
+<script>
+    // ---------- QUESTIONS DATA (with answers & explanations) ----------
+    const questionsData = [
+        { //1
+            text: "What is the output of the following code?<br><code>String s1 = \"Java\";<br>String s2 = \"Java\";<br>System.out.println(s1 == s2);</code>",
+            options: ["true", "false", "Compilation Error", "null"],
+            correct: 0,
+            explanation: "Both literals refer to the same object in the String Constant Pool, so == returns true."
+        },
+        { //2
+            text: "What is the output?<br><code>String s1 = new String(\"Java\");<br>String s2 = new String(\"Java\");<br>System.out.println(s1.equals(s2));<br>System.out.println(s1 == s2);</code>",
+            options: ["true true", "false false", "true false", "false true"],
+            correct: 2,
+            explanation: "equals() compares content → true; == compares reference → false (different heap objects)."
+        },
+        { //3
+            text: "Why are String objects considered immutable in Java?",
+            options: ["Because they are stored in stack memory.", "Because their state cannot be changed after creation.", "Because they use the final keyword for storage.", "Because they cannot be shared between threads."],
+            correct: 1,
+            explanation: "Strings are immutable: any modification creates a new String object."
+        },
+        { //4
+            text: "What will be the result?<br><code>String str = \"Hello\";<br>str.concat(\" World\");<br>System.out.println(str);</code>",
+            options: ["Hello World", "Hello", "null", "Compilation Error"],
+            correct: 1,
+            explanation: "concat() returns a new String, but the result is ignored; original str unchanged."
+        },
+        { //5
+            text: "Which method compares two Strings for equality, ignoring case?",
+            options: ["compare()", "equals()", "match()", "equalsIgnoreCase()"],
+            correct: 3,
+            explanation: "equalsIgnoreCase() compares content without case sensitivity."
+        },
+        { //6
+            text: "What does substring(2,5) return for \"Programming\"?",
+            options: ["\"ogr\"", "\"gra\"", "\"rog\"", "\"gram\""],
+            correct: 0,
+            explanation: "Indices: P0 r1 o2 g3 r4 a5... substring(2,5) → indexes 2,3,4 => 'o','g','r' => \"ogr\"."
+        },
+        { //7
+            text: "Output?<br><code>String str = \"   Java Quiz   \";<br>System.out.println(str.trim().length());</code>",
+            options: ["13", "9", "8", "11"],
+            correct: 1,
+            explanation: "trim() removes spaces → \"Java Quiz\" length = 9 (including the space)."
+        },
+        { //8
+            text: "Which method splits a string into an array?",
+            options: ["split()", "divide()", "tokenize()", "break()"],
+            correct: 0,
+            explanation: "split(regex) returns String[]."
+        },
+        { //9
+            text: "How many String objects are created?<br><code>String s1 = \"Cat\";<br>String s2 = \"Cat\";<br>String s3 = new String(\"Cat\");</code>",
+            options: ["1", "2", "3", "4"],
+            correct: 1,
+            explanation: "One literal in pool (shared by s1,s2) + one new String heap object = total 2 objects."
+        },
+        { //10
+            text: "The intern() method in Java is used to:",
+            options: ["Convert string to char array", "Move string from heap to String Constant Pool", "Delete string from memory", "Compare strings ignoring case"],
+            correct: 1,
+            explanation: "intern() returns canonical representation from pool."
+        },
+        { //11
+            text: "Which class is NOT thread-safe but faster for string manipulation?",
+            options: ["String", "StringBuffer", "StringBuilder", "StringTokenizer"],
+            correct: 2,
+            explanation: "StringBuilder is not synchronized → faster for single-threaded scenarios."
+        },
+        { //12
+            text: "Output?<br><code>StringBuilder sb = new StringBuilder(\"Java\");<br>sb.append(\" Quiz\");<br>System.out.println(sb);</code>",
+            options: ["Java Quiz", "Quiz", "Java", "JavaQuiz"],
+            correct: 0,
+            explanation: "append() modifies StringBuilder contents, prints \"Java Quiz\"."
+        },
+        { //13
+            text: "Most efficient way to reverse a string without many intermediate objects?",
+            options: ["String with for loop", "StringBuilder.reverse()", "StringBuffer.reverse()", "StringUtils.reverse()"],
+            correct: 1,
+            explanation: "StringBuilder.reverse() is efficient & fast for single-threaded reversal."
+        },
+        { //14
+            text: "Result?<br><code>String str = null;<br>System.out.println(str.length());</code>",
+            options: ["0", "null", "NullPointerException", "Compilation Error"],
+            correct: 2,
+            explanation: "Calling method on null reference throws NullPointerException."
+        },
+        { //15
+            text: "Output?<br><code>String a = \"20\";<br>String b = \"10\";<br>System.out.println(a + b);</code>",
+            options: ["30", "2010", "20 10", "Compilation Error"],
+            correct: 1,
+            explanation: "String concatenation combines texts, not numeric addition."
+        },
+        { //16
+            text: "Which statement is valid?",
+            options: ["String str = 'A';", "String str = \"A\";", "String str = new String('A');", "String str = new String(65);"],
+            correct: 1,
+            explanation: "String literals use double quotes; single quotes are for char."
+        }
+    ];
+
+    // Store user selections: array of selectedIndex (-1 = not answered)
+    let userAnswers = new Array(questionsData.length).fill(-1);
+    let quizSubmitted = false;   // To show results & disable changes after submit?
+    // We'll allow selection after reset, but submit shows final scores.
+    // For better UX: submit shows correctness, but we keep radio values. We'll not lock after submit; but we show colored feedback.
+    // But we will show feedback in each card when submit pressed, and then recalc.
+
+    const totalQuestions = questionsData.length;
+    document.getElementById("totalQuestionsSpan").innerText = totalQuestions;
+    document.getElementById("totalCountSpan2").innerText = totalQuestions;
+
+    // Render all questions dynamically
+    function renderQuestions() {
+        const container = document.getElementById("questionsContainer");
+        container.innerHTML = "";
+        questionsData.forEach((q, idx) => {
+            const card = document.createElement("div");
+            card.className = "question-card";
+            card.setAttribute("data-qid", idx);
+            
+            // title
+            const titleDiv = document.createElement("div");
+            titleDiv.className = "q-title";
+            titleDiv.innerHTML = `<span class="q-num">Question ${idx+1}</span> ${q.text}`;
+            
+            // options
+            const optionsDiv = document.createElement("div");
+            optionsDiv.className = "options";
+            const selectedVal = userAnswers[idx] !== -1 ? userAnswers[idx] : null;
+            
+            q.options.forEach((opt, optIdx) => {
+                const optionWrapper = document.createElement("div");
+                optionWrapper.className = "option";
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = `q${idx}`;
+                radio.value = optIdx;
+                radio.id = `q${idx}_opt${optIdx}`;
+                if (selectedVal === optIdx) radio.checked = true;
+                radio.addEventListener("change", (function(qIdx, oIdx) {
+                    return function() {
+                        if (quizSubmitted) {
+                            // optionally allow changes but we'll reset submit flag? better allow resubmit? we'll make resubmit recalc.
+                            // but to be student-friendly: if quiz submitted, we can allow changes and remove global submitted flag? easier: set quizSubmitted false & clear result panel.
+                            quizSubmitted = false;
+                            document.getElementById("resultPanel").style.display = "none";
+                        }
+                        userAnswers[qIdx] = oIdx;
+                        updateStatsAndScoreOnly();
+                        // remove current feedback for this question if exists? we just update stats.
+                        const fbDiv = card.querySelector(".feedback");
+                        if (fbDiv && !quizSubmitted) {
+                            fbDiv.remove();  // remove old feedback upon new selection before submit.
+                        }
+                    };
+                })(idx, optIdx));
+                
+                const label = document.createElement("label");
+                label.htmlFor = `q${idx}_opt${optIdx}`;
+                label.innerText = `${String.fromCharCode(65+optIdx)}. ${opt}`;
+                optionWrapper.appendChild(radio);
+                optionWrapper.appendChild(label);
+                optionsDiv.appendChild(optionWrapper);
+            });
+            
+            card.appendChild(titleDiv);
+            // optional code block: detect if text contains <code> but we can add styling, but anyway.
+            card.appendChild(optionsDiv);
+            
+            // Feedback area (initially empty)
+            const feedbackDiv = document.createElement("div");
+            feedbackDiv.className = "feedback neutral-feedback";
+            feedbackDiv.style.display = "none";
+            card.appendChild(feedbackDiv);
+            container.appendChild(card);
+        });
+        updateStatsAndScoreOnly();
+    }
+    
+    // update attempted count & display (score will be computed after submit only)
+    function updateStatsAndScoreOnly() {
+        let attempted = userAnswers.filter(a => a !== -1).length;
+        document.getElementById("attemptedCount").innerText = attempted;
+        // we also show current "score" only if quizSubmitted? but we show dynamic 0 before submit.
+        if (!quizSubmitted) {
+            document.getElementById("scoreDisplay").innerText = "0";
+        } else {
+            // recalc score on stats (when submit happened)
+            let correctCount = 0;
+            for (let i=0; i<totalQuestions; i++) {
+                if (userAnswers[i] === questionsData[i].correct) correctCount++;
+            }
+            document.getElementById("scoreDisplay").innerText = correctCount;
+        }
+    }
+    
+    // compute and display all feedbacks & final result
+    function submitQuiz() {
+        quizSubmitted = true;
+        let correctCount = 0;
+        // Loop through each question and show feedback
+        for (let i = 0; i < totalQuestions; i++) {
+            const selected = userAnswers[i];
+            const isCorrect = (selected === questionsData[i].correct);
+            if (isCorrect && selected !== -1) correctCount++;
+            
+            const cards = document.querySelectorAll(".question-card");
+            if (cards[i]) {
+                let feedbackDiv = cards[i].querySelector(".feedback");
+                if (!feedbackDiv) {
+                    feedbackDiv = document.createElement("div");
+                    feedbackDiv.className = "feedback";
+                    cards[i].appendChild(feedbackDiv);
+                }
+                const qData = questionsData[i];
+                const correctLetter = String.fromCharCode(65 + qData.correct);
+                const correctAnswerText = qData.options[qData.correct];
+                let message = "";
+                if (selected === -1) {
+                    message = `⚠️ Not answered. Correct answer: ${correctLetter}. ${correctAnswerText}. ${qData.explanation}`;
+                    feedbackDiv.className = "feedback wrong-feedback";
+                } else if (isCorrect) {
+                    message = `✅ Correct! ${qData.explanation}`;
+                    feedbackDiv.className = "feedback correct-feedback";
+                } else {
+                    const selectedLetter = String.fromCharCode(65 + selected);
+                    message = `❌ Wrong. You chose ${selectedLetter}. ${qData.options[selected]}. Correct: ${correctLetter}. ${correctAnswerText}. ${qData.explanation}`;
+                    feedbackDiv.className = "feedback wrong-feedback";
+                }
+                feedbackDiv.innerHTML = `<span>💬</span> ${message}`;
+                feedbackDiv.style.display = "flex";
+            }
+        }
+        // update final score display
+        document.getElementById("scoreDisplay").innerText = correctCount;
+        const totalPossible = totalQuestions;
+        const percentage = Math.round((correctCount / totalPossible) * 100);
+        const resultPanel = document.getElementById("resultPanel");
+        resultPanel.style.display = "block";
+        let gradeMessage = "";
+        if (percentage >= 85) gradeMessage = "🌟 Excellent! Java String Master!";
+        else if (percentage >= 65) gradeMessage = "👍 Good job! Review the tricky parts.";
+        else if (percentage >= 45) gradeMessage = "📚 Not bad, but revise immutability & StringBuilder.";
+        else gradeMessage = "🔁 Needs practice — go through String basics again!";
+        
+        resultPanel.innerHTML = `🎯 Your Score: ${correctCount} / ${totalPossible}  (${percentage}%)<br>${gradeMessage}<br>✨ Use "Reset Quiz" to try again fresh.`;
+        
+        // update stats bar (score is updated)
+        let attemptedNow = userAnswers.filter(a => a !== -1).length;
+        document.getElementById("attemptedCount").innerText = attemptedNow;
+    }
+    
+    function resetQuiz() {
+        // reset all answers to -1
+        userAnswers.fill(-1);
+        quizSubmitted = false;
+        // clear result panel
+        const resultPanel = document.getElementById("resultPanel");
+        resultPanel.style.display = "none";
+        resultPanel.innerHTML = "";
+        // re-render to clear radio & feedback
+        renderQuestions();
+        // reset score display to 0
+        document.getElementById("scoreDisplay").innerText = "0";
+        let attempted = userAnswers.filter(a => a !== -1).length;
+        document.getElementById("attemptedCount").innerText = attempted;
+        // after rerender we also need to ensure any residual event listeners are reattached but render already sets new radios.
+        // manually set quizSubmitted false
+    }
+    
+    // initial render
+    renderQuestions();
+    
+    // submit button listener
+    document.getElementById("submitQuizBtn").addEventListener("click", () => {
+        submitQuiz();
+    });
+    
+    // reset button listener
+    document.getElementById("resetQuizBtn").addEventListener("click", () => {
+        resetQuiz();
+    });
+    
+    // optional: update stats on any radio change (already in each radio's change, but we also need it when reset calls)
+    window.updateStatsAndScoreOnly = updateStatsAndScoreOnly;
+</script>
+</body>
+</html>
+```
